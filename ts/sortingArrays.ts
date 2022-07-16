@@ -24,50 +24,10 @@ function swap(array: any, firstIndex: number, secondIndex: number): void {
     array[secondIndex] = temp
 }
 
-function countCharachterOfString(word: string): void {
-
-    // lowercase the word
-    let lowerCaseWord = word.toLowerCase()
-
-    // create an object to store date
-    let result: Map<string, number> = new Map()
-
-    // start counting and storing
-    for (let i = 0; i < lowerCaseWord.length; i++) {
-        let currentChar = lowerCaseWord.charAt(i)
-        // if(currentChar>112 || currentChar.co<97)
-        if (result.has(currentChar)) {
-            let count = result.get(currentChar)!
-            result.set(currentChar, count + 1)
-        } else {
-            result.set(currentChar, 1)
-        }
-    }
-
-    // display the object
-    // let sortedResult = new Map([...result.entries()].sort())
-    // let resultString:string = "{ "
-    // sortedResult.forEach((value, key, map) => { resultString = resultString + ` ("${key}", ${value}) `})
-    // resultString = resultString + " }"
-    // console.log(resultString)
-
-    // diplay in Hady way
-    let mapKeys:any = Array.from(result.keys()).sort().map( item => ` ("${item}", ${result.get(item)}) `)
-    console.log(`{ ${mapKeys.join(",")}}`);
-    
-
-    // console.log(result.entries())
-
-
-}
-
-countCharachterOfString("Hello everyone welcome in my youtube channel")
-
-
-// let time1 = performance.now()
-// minSort([5,6,2,4,1,3])
-// let time2 = performance.now()
-// console.log(`Time elapsed: ${time2-time1} ms`)
+let time1 = performance.now()
+minSort([5,6,2,4,1,3])
+let time2 = performance.now()
+console.log(`Time elapsed: ${time2-time1} ms`)
 
 
 // function findMin(array: any): number{
