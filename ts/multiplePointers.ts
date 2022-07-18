@@ -23,4 +23,24 @@ function sumZero(array: number[]): number[] {
     return []
 }
 
-console.log(sumZero([-5, -4, -1, 1, 2, 7, 9]))
+function sumZeroUdemy(array: number[]): number[] {
+
+    let left: number = 0
+    let right: number = array.length - 1
+    let sum: number = 0
+
+    while (left < right) {
+
+        sum = array[left] + array[right]
+
+        if (sum === 0) {
+            return [array[left], array[right]]
+        } else sum > 0 ? right-- : left ++
+    
+    }
+
+    return []
+}
+
+
+console.log(sumZeroUdemy([-9, 1, 2, 7, 9]))
