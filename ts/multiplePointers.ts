@@ -56,6 +56,23 @@ function countUniqueValues(inputArray: number[]): number {
     return result
 }
 
+function countUniqueValue(inputArray: number[]): number {
+    let start: number = 0, end: number = 1
+    if (inputArray.length === 0) {
+        return 0;
+    } else
+        while (end < inputArray.length) {
+
+            if (inputArray[start] !== inputArray[end]) {
+                inputArray[++start] = inputArray[end++]
+            } else {
+                
+                    end++
+            }
+        }
+    return start+1
+}
+
 /**
  * Given an input string s, reverse the order of the words.
  * A word is defined as a sequence of non-space characters. 
@@ -112,7 +129,7 @@ function reverseWords(s: string): string {
     return word.trim()
 };
 
-console.log(reverseWords("a good   example"));
+// console.log(reverseWords("a good   example"));
 
 
 
@@ -137,4 +154,4 @@ function sumZeroUdemy(array: number[]): number[] {
 
 
 // console.log(sumZeroUdemy([-9, 1, 2, 7, 9]))
-// console.log(countUniqueValues([-3,0,1,1, 2, 7, 9]))
+console.log(countUniqueValue([-3,-3,0,1,1,2, 2,2, 7, 9,9,12]))
