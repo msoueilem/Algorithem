@@ -59,7 +59,7 @@ function validAnagram(word: string, anagram: string): boolean {
 }
 
 console.log(sameBySort([1, 1, 1, 1, 5, 3, 2, 3], [4, 1, 1, 9, 25, 1, 9]))
-console.log(validAnagram("cincama","iccnama"));
+console.log(validAnagram("cincama","imccnama"));
 
 
 
@@ -112,6 +112,30 @@ function sameFrq(array1: number[], array2: number[]) {
 
 
 
+function validAnagramObj(word: string, anagram: string): boolean {
+
+    if (anagram.length !== word.length)
+        return false
+
+    let wordFrq: any = {}
+
+    for (const char of word) {
+        wordFrq[char] ? wordFrq[char] += 1 : wordFrq[char] = 1
+    }
+    
+    
+    for (const char of anagram) {
+        
+        if(!wordFrq[char])
+        return false
+        else
+        wordFrq[char] -= 1
+
+    }
+    
+    return true
+    
+}
 
 
 
