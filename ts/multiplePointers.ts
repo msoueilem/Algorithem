@@ -66,11 +66,11 @@ function countUniqueValue(inputArray: number[]): number {
             if (inputArray[start] !== inputArray[end]) {
                 inputArray[++start] = inputArray[end++]
             } else {
-                
-                    end++
+
+                end++
             }
         }
-    return start+1
+    return start + 1
 }
 
 /**
@@ -88,22 +88,22 @@ function reverseWords(s: string): string {
         console.log(s.charAt(i));
 
 
-        if (s.charAt(i) === " " ) {
-            if(word === "")
-             continue
-            console.log(word,s.charAt(i),i);
+        if (s.charAt(i) === " ") {
+            if (word === "")
+                continue
+            console.log(word, s.charAt(i), i);
             // if (i === s.length - 1) {
-                
+
             //     word = word + s.charAt(i)
             //     frequencyWord.push(word)
             // } else {
-                frequencyWord.push(word)
-                word = ""
+            frequencyWord.push(word)
+            word = ""
             // }
         } else {
             // word = word + s.charAt(i)
             if (i === s.length - 1) {
-                
+
                 word = word + s.charAt(i)
                 frequencyWord.push(word)
             } else {
@@ -118,7 +118,7 @@ function reverseWords(s: string): string {
     frequencyWord.reverse()
     word = ""
     for (const item of frequencyWord) {
-            word = word + " " + item
+        word = word + " " + item
     }
     // word = frequencyWord[frequencyWord.length - 1]
 
@@ -154,4 +154,119 @@ function sumZeroUdemy(array: number[]): number[] {
 
 
 // console.log(sumZeroUdemy([-9, 1, 2, 7, 9]))
-console.log(countUniqueValue([-3,-3,0,1,1,2, 2,2, 7, 9,9,12]))
+// console.log(countUniqueValue([-3,-3,0,1,1,2, 2,2, 7, 9,9,12]))
+
+function areThereDuplicates(...input: any): boolean {
+    // good luck. (supply any arguments you deem necessary.)
+    let startIndex: number = 0
+    let startItem: number = input[startIndex]
+
+    if (input.length === 0) {
+        return false
+    }
+
+    for (let i = 1; i < input.length; i++) {
+
+        startItem = input[startIndex]
+        let item = input[i]
+
+        // console.log(`length: ${input.length} item: ${item} startItem: ${startItem} `);
+
+
+        if (item === startItem)
+            return true
+
+        if (i === input.length - 1)
+            i = ++startIndex
+    }
+
+    return false
+}
+
+// console.log(areThereDuplicates(1,2,3))
+// console.log(areThereDuplicates(1,2,2))
+// console.log(areThereDuplicates('a','b','c','a'))
+
+function averagePair(inputArray: number[], targetAverage: number): boolean {
+    // add whatever parameters you deem necessary - good luck!
+    let startIndex: number = 0
+    let endIndex: number = 1
+    let someElement: number = inputArray[startIndex] + inputArray[endIndex];
+    let someIndexes: number = endIndex - startIndex + 1
+    if (inputArray.length === 0) return false
+    else
+        while (endIndex < inputArray.length) {
+            let average: number = someElement / someIndexes
+            if (average === targetAverage) {
+                return true
+            } else {
+                if (average > targetAverage) {
+                    someElement = someElement - inputArray[endIndex--] - inputArray[startIndex] + inputArray[++startIndex]
+                } else {
+                    someElement += inputArray[++endIndex]
+                    someElement += endIndex
+                }
+            }
+        }
+    return false
+}
+
+// console.log(averagePair([],23));
+
+function isSubsequence(substringWord: string, word: string): boolean {
+    // good luck. Add any arguments you deem necessary.
+    let startChar: string = substringWord[0]
+    let startIndex: number = 0
+    let endIndex: number = substringWord.length
+    let startIndexes: number[] = []
+
+    if (substringWord.length > word.length || substringWord.length === 0) {
+        return false
+    }
+    if (substringWord.length === word.length) {
+        for (let i = 0; i < word.length; i++) {
+
+            if (substringWord[i] !== word[i])
+                return false
+        }
+    }
+    for (let i = 0; i < word.length; i++) {
+        let char = word[i]
+        if (char === startChar)
+            startIndexes.push(i)
+    }
+    for (const index of startIndexes) {
+        endIndex = index+1
+        console.log(startIndexes, "Index",index);
+        
+        // for (let i = 0; i < substringWord.length; i++) {
+            // let i = index
+            while(index <= endIndex - 1){
+                console.log(endIndex !== (index + 1));
+                
+                console.log(`index: ${index} endIndex: ${endIndex} charsub: ${substringWord[endIndex]} charword: ${word[endIndex+index]}`);
+                
+                if(endIndex === substringWord.length){
+                    return true
+                } else{
+                    if(substringWord[endIndex] !== word[index + endIndex]){
+                        endIndex = index+1
+                    }
+                }
+                
+                endIndex++
+                console.log(endIndex);
+
+            // if (substringWord[i] !== word[endIndex++])
+            //     return false
+            // if (i === substringWord.length && word[endIndex] == substringWord[i])
+            //     return true
+        }
+
+    }
+
+    return false
+}
+
+console.log(isSubsequence("hello", "hello world"));
+console.log(isSubsequence("sing", "sting"));
