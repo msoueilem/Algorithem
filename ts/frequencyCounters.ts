@@ -155,6 +155,41 @@ function sameUdemy(array1: any, array2: any): boolean {
     return true;
 }
 
+function sameFrequency(number1: number, number2: number): boolean{
+    // good luck. Add any arguments you deem necessary.
+    let frqNumber1: any = {}
+    let current: number = 0
+    if(number1 === number2){
+        return true
+    }
+    if(number1 === 0 || number2 === 0){
+        return false
+    }
+    while(number1 > 0){
+        current = number1 - Math.floor(number1/10)*10
+        frqNumber1[current] ? frqNumber1[current] +=1 :  frqNumber1[current] = 1
+        number1 = Math.floor(number1/10)
+    }
+    
+
+    while(number2 > 0){
+        current = number2 - Math.floor(number2/10)*10
+        console.log(frqNumber1[current], current);
+        
+        if (frqNumber1[current] <= 0 || frqNumber1[current] === undefined) {
+            return false  
+        }
+        else  
+        frqNumber1[current]-=1
+
+        number2 = Math.floor(number2/10)
+    }
+    return true
+}
+
+console.log(sameFrequency(281,183) );
+
+
 // Applying frequency
 // function sameUdemyFrequency(array1: any, array2: any): boolean {
 //     if (array1.length != array2.length)
