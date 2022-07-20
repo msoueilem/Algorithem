@@ -1,0 +1,129 @@
+Description
+Implement a progress bar using Angular 6. You should only modify the TS tab, and not the HTML or CSS tab. The task also contains several read-only tests, so consider this a TDD task where you need to implement the solution to pass the prewritten tests.
+
+Functional requirements
+Create a form with four fields related to a document that is being submitted. There should be a progress indicator at the top that moves forward as you fill each field. The indicator should automatically set the state of the progress bar based on how many of the input fields contain a valid value.
+
+The four fields in the document should be the following:
+
+An input field for the document name with id = "documentName" (this id is used in the tests, so it's important to use this exact identifier);
+A dropdown for the document type with id = "documentType".
+The dropdown should have three options: empty value (initial state), 'Plain', and 'PDF'.
+Usage example: <option value="Plain">Plain</option> for Plain, <option value=""></option> for empty value.
+A dropdown for the document category with id = "category".
+The dropdown should have four options with the following values: empty value (initial state), 'Audit', 'Application', and 'Other' respectively.
+Usage example: <option value="Audit">Audit</option>.
+An input field for the sender email with id = "email".
+Here are the functional requirements for the fields validation:
+
+The value of any dropdown field is considered valid if it is not empty;
+The document name is considered valid if its length is between 2 and 32 characters, inclusive;
+The sender email is considered valid if all the requirements below are satisfied:
+It contains a string that is at most 128 characters long;
+The string matches the format <username>@<domain>, where both username and domain can contain only lowercase English letters, digits, and periods (.);
+Additionally, domain should contain at least one period character (.);
+Both username and domain must not contain any consecutive periods (..).
+The state of the progress bar indicator should be the following:
+
+0% if all fields values are empty, as they are in the initial state;
+25% if only one field has a valid value;
+50% for two filled fields;
+75% for three valid fields
+100% if all of the fields have values selected and all the values are valid.
+Style requirements
+The style requirements for progress bar are the following:
+
+It should be implemented as two nested divs:
+A div with className = "form-progress-bar-wrapper" of grey color ( #e8ebee) with full screen width;
+A div with className = "form-progress-bar" of blue color ( #007bff) with width reflecting the number of valid values.
+The width of the progress bar should be indicating the current filling values: 0%, 25%,50%, 75%, and 100% of the wrapper's width respectively.
+Feel free to design the progress bar page as you wish, there are no additional requirements for the styling except the ones above.
+
+Examples
+After selecting the document type the form may look like this:
+
+
+
+And after filling the document name, the form may look like this:
+
+
+
+Libraries
+To enable Angular 6.0.5 the following libraries should be included in "Manage Libraries" section (the order matters!):
+
+https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.2.1/rxjs.umd.min.js
+https://cdnjs.cloudflare.com/ajax/libs/core-js/2.5.7/core.js
+https://unpkg.com/@angular/core@6.0.5/bundles/core.umd.js
+https://cdnjs.cloudflare.com/ajax/libs/zone.js/0.8.26/zone.min.js
+https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.2.1/rxjs.umd.min.js
+https://unpkg.com/@angular/compiler@6.0.5/bundles/compiler.umd.js
+https://unpkg.com/@angular/platform-browser@6.0.5/bundles/platform-browser.umd.js
+https://unpkg.com/@angular/platform-browser-dynamic@6.0.5/bundles/platform-browser-dynamic.umd.js
+https://unpkg.com/@angular/forms@6.0.5/bundles/forms.umd.js
+Feel free to add the above libraries manually if they are not there or add more libraries if you need them.
+
+Note: feel free to disable error highlighting within our IDE settings to avoid highlighting issues.
+
+[execution time limit] 10 seconds
+
+/// TS File
+const { Component, VERSION } = ng.core;
+
+@Component({
+  selector: 'my-app',
+  template: `
+  <h1>{{title}} </h1>
+  TODO: Define your Angular ${VERSION.major} component.
+  <form [formGroup]="newTaskForm" (submit)="createNewTask()">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" required>
+    </div>
+     <button type="submit" class="btn btn-default">Submit</button>
+</form>
+  `
+})
+class AppComponent {  
+  title=`Hello World! You are working with Angular ${VERSION.major}`;
+  newTaskForm: FormData
+  createNewTask(): void{
+      
+    }
+    
+  constructor() {
+    // TODO: Define your Angular component implementation
+   
+  
+  }
+}
+
+
+// main.js
+const { BrowserModule } = ng.platformBrowser;
+const { NgModule } = ng.core;
+const { CommonModule } = ng.common;
+const { FormsModule } = ng.forms;
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    CommonModule,
+    FormsModule
+  ],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  providers: []
+})
+class AppModule {
+  createNewTask(): void{
+      
+    }
+  
+}
+
+const { platformBrowserDynamic } = ng.platformBrowserDynamic; 
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(err => console.error(err));
+  

@@ -213,49 +213,52 @@ function averagePair(inputArray: number[], targetAverage: number): boolean {
 
 // console.log(averagePair([],23));
 
+
 function isSubsequence(substringWord: string, word: string): boolean {
     // good luck. Add any arguments you deem necessary.
-    let startChar: string = substringWord[0]
+    // let startChar: number =  0 //substringWord[0]
     let startIndex: number = 0
-    let endIndex: number = substringWord.length
-    let startIndexes: number[] = []
+    let endIndex: number =  0 //substringWord.length
+    // let startIndexes: number[] = []
 
-    if (substringWord.length > word.length || substringWord.length === 0) {
-        return false
-    }
-    if (substringWord.length === word.length) {
-        for (let i = 0; i < word.length; i++) {
+    // if (substringWord.length > word.length || substringWord.length === 0) {
+    //     return false
+    // }
+    // if (substringWord.length === word.length) {
+    //     for (let i = 0; i < word.length; i++) {
 
-            if (substringWord[i] !== word[i])
-                return false
-        }
-    }
-    for (let i = 0; i < word.length; i++) {
-        let char = word[i]
-        if (char === startChar)
-            startIndexes.push(i)
-    }
-    for (const index of startIndexes) {
-        endIndex = index+1
-        console.log(startIndexes, "Index",index);
+    //         if (substringWord[i] !== word[i])
+    //             return false
+    //     }
+    // }
+    if(substringWord.length === 0) return true
+    // for (let i = 0; i < word.length; i++) {
+    //     let char = word[i]
+    //     if (char === startChar)
+    //         startIndexes.push(i)
+    // }
+
+    // for (const index of startIndexes) {
+    //     endIndex = index+1
+    //     console.log(startIndexes, "Index",index);
         
         // for (let i = 0; i < substringWord.length; i++) {
             // let i = index
-            while(index <= endIndex - 1){
-                console.log(endIndex !== (index + 1));
+            while(endIndex < word.length){
+                // console.log(endIndex !== (index + 1));
                 
-                console.log(`index: ${index} endIndex: ${endIndex} charsub: ${substringWord[endIndex]} charword: ${word[endIndex+index]}`);
+                // console.log(`index: ${index} endIndex: ${endIndex} charsub: ${substringWord[endIndex]} charword: ${word[endIndex+index]}`);
                 
-                if(endIndex === substringWord.length){
-                    return true
-                } else{
-                    if(substringWord[endIndex] !== word[index + endIndex]){
-                        endIndex = index+1
-                    }
+                if(word[endIndex] === substringWord[ startIndex]){
+                    startIndex++
                 }
+                if(startIndex === substringWord.length){
+                    return true
+                }
+                // } else{
                 
                 endIndex++
-                console.log(endIndex);
+                // console.log(endIndex);
 
             // if (substringWord[i] !== word[endIndex++])
             //     return false
@@ -263,10 +266,23 @@ function isSubsequence(substringWord: string, word: string): boolean {
             //     return true
         }
 
-    }
+    // }
 
     return false
 }
 
-console.log(isSubsequence("hello", "hello world"));
-console.log(isSubsequence("sing", "sting"));
+function isSubsequences(sub: string, word: string): boolean {
+    // good luck. Add any arguments you deem necessary.
+    let start = 0
+    let end = 0
+    if(sub.length === 0) return true
+    while(end < word.length){
+        if(word[end] === sub[start]) start++
+        if(start === sub.length) return true
+        end++
+    }
+    return false
+  }
+
+console.log(isSubsequences("hello", "hello world"));
+console.log(isSubsequences("sing", "stng"));

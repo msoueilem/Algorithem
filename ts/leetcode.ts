@@ -133,7 +133,7 @@ function longestOnes(nums: number[], k: number): number {
                 flipedNums[zerosIndex[i]] = 1
             }
 
-            for (let i = 0; i < zerosIndex.length - k +1; i++) {
+            for (let i = 0; i < zerosIndex.length - k + 1; i++) {
 
                 for (let item of flipedNums) {
                     if (item === 1)
@@ -152,18 +152,20 @@ function longestOnes(nums: number[], k: number): number {
 };
 
 function longestOne(nums: number[], k: number): number {
-	let i = 0, j = 0
+    let i = 0, j = 0
 
-	for (; j < nums.length; j++) {
-        
+    for (; j < nums.length; j++) {
+
         if (nums[j] == 0) { k-- }
-		if (k < 0) {
-			if (nums[i] == 0) { k++ }
-			i++
-		}
-	}
+        if (k < 0) {
+            if (nums[i] == 0) {
+                k++
+            }
+            i++
+        }
+    }
 
-	return j - i
+    return j - i
 }
 
 // console.log(longestOne([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2));
@@ -180,28 +182,28 @@ function checkOnesSegments(s: string): boolean {
     let counter: number = 0
     let segmentTimes: number = 0
     let overAllOnes: number = 0
-    if(s.length < 2)
+    if (s.length < 2)
         return s[0] === "1"
-    if(s.length === 2)
-        return s[0] === "1" || s[1] === "1" 
-    for(let char of s){
-        if(char === "1"){
+    if (s.length === 2)
+        return s[0] === "1" || s[1] === "1"
+    for (let char of s) {
+        if (char === "1") {
             counter++
             overAllOnes++
         }
-            
-        else{
-            
+
+        else {
+
             counter = 0
-            if(counter > 0)
-            segmentTimes++
+            if (counter > 0)
+                segmentTimes++
         }
-            
-        if(counter === 2 )
+
+        if (counter === 2)
             return true
     }
-    console.log(overAllOnes,segmentTimes);
-    
+    console.log(overAllOnes, segmentTimes);
+
     return false || (overAllOnes === 1 && segmentTimes === 0)
 };
 
@@ -209,11 +211,11 @@ function checkOnesSegment(s: string): boolean {
     let counter: number = 0
     let lastOne: number = 0
     let index: number = 0
-    while(index < s.length){
+    while (index < s.length) {
         // console.log(`index: ${index} lastOne: ${lastOne} counter: ${counter}`);
-        
-        if(s[index] === "1"){
-            if(counter > 0 && index > lastOne + 1) return false
+
+        if (s[index] === "1") {
+            if (counter > 0 && index > lastOne + 1) return false
             counter++
             lastOne = index
         }
@@ -223,4 +225,71 @@ function checkOnesSegment(s: string): boolean {
     return true
 };
 
-console.log(checkOnesSegment("110"));
+// console.log(checkOnesSegment("110"));
+
+// 860. Lemonade Change
+/**
+ * At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you 
+ * and order one at a time (in the order specified by bills). 
+ * Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill. 
+ * You must provide the correct change to each customer so that the net transaction is that the customer pays $5.
+ * Note that you do not have any change in hand at first.
+
+Given an integer array bills where bills[i] is the bill the ith customer pays, 
+return true if you can provide every customer with the correct change, or false otherwise.
+ */
+
+function lemonadeChange(bills: number[]): boolean {
+    let fiveBillCount = 0
+    let tenBillCount = 0
+    if (bills.length === 0) return true
+    for (const bill of bills) {
+        if (bill === 5) {
+            fiveBillCount++
+        } else if (bill === 10) {
+            if (fiveBillCount === 0) return false
+            fiveBillCount--
+            tenBillCount++
+        } else {
+            let hasThreeFive = fiveBillCount > 2
+            let hasTenAndFive = fiveBillCount > 0 && tenBillCount > 0
+
+            // if( !hasTenAndFive && !hasThreeFive ) return false
+
+            if (hasTenAndFive) {
+                fiveBillCount--
+                tenBillCount--
+            } else if (hasThreeFive) {
+                fiveBillCount -= 3
+            } else {
+                return false
+            }
+
+        }
+    }
+    return true
+};
+
+// 191. Number of 1 Bits
+/**
+ * Write a function that takes an unsigned integer and returns the 
+ * number of '1' bits it has (also known as the Hamming weight).
+ */
+
+function hammingWeight(n: number): number {
+    let counter = 0
+    console.log(n);
+    
+    
+    while(n !== 0){
+        console.log(n, n % 2);
+        if(n % 2 === 1) {
+            counter++
+        }
+        n = Math.floor(n / 10)
+    }
+
+    return counter
+};
+
+console.log(hammingWeight(0o1011))
