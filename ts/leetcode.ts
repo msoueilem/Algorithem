@@ -166,6 +166,61 @@ function longestOne(nums: number[], k: number): number {
 	return j - i
 }
 
-console.log(longestOne([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2));
-console.log(longestOnes([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3));
-console.log(longestOnes([1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1], 8));
+// console.log(longestOne([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2));
+// console.log(longestOnes([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3));
+// console.log(longestOnes([1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1], 8));
+
+// 1784. Check if Binary String Has at Most One Segment of Ones
+/**
+ * Given a binary string s ​​​​​without leading zeros, 
+ * return true​​​ if s contains at most one contiguous segment of ones. Otherwise, return false.
+ */
+
+function checkOnesSegments(s: string): boolean {
+    let counter: number = 0
+    let segmentTimes: number = 0
+    let overAllOnes: number = 0
+    if(s.length < 2)
+        return s[0] === "1"
+    if(s.length === 2)
+        return s[0] === "1" || s[1] === "1" 
+    for(let char of s){
+        if(char === "1"){
+            counter++
+            overAllOnes++
+        }
+            
+        else{
+            
+            counter = 0
+            if(counter > 0)
+            segmentTimes++
+        }
+            
+        if(counter === 2 )
+            return true
+    }
+    console.log(overAllOnes,segmentTimes);
+    
+    return false || (overAllOnes === 1 && segmentTimes === 0)
+};
+
+function checkOnesSegment(s: string): boolean {
+    let counter: number = 0
+    let lastOne: number = 0
+    let index: number = 0
+    while(index < s.length){
+        // console.log(`index: ${index} lastOne: ${lastOne} counter: ${counter}`);
+        
+        if(s[index] === "1"){
+            if(counter > 0 && index > lastOne + 1) return false
+            counter++
+            lastOne = index
+        }
+        index++
+    }
+
+    return true
+};
+
+console.log(checkOnesSegment("110"));
