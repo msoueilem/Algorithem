@@ -74,7 +74,7 @@ function maxSubarraySumtwo(array: number[], n: number): number {
     let max = 0
 
     if (n > array.length) {
-        return null
+        return 0
     } else {
         while (start < end) {
             max += array[start]
