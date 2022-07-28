@@ -93,13 +93,32 @@ function maxSubarraySumtwo(array: number[], n: number): number {
     return max
 }
 
-console.log(maxSubarraySumtwo([100, 200, 300, 400], 2));
-console.log(maxSubarraySumtwo([1, 4, 2, 10, 23, 3, 1, 0, 20], 4));
-console.log(maxSubarraySumtwo([-3, 4, 0, -2, 6, -1], 2));
-console.log(maxSubarraySumtwo([3, -2, 7, -4, 1, -1, 4, -2, 1], 2));
-console.log(maxSubarraySumtwo([2, 3], 3));
+// console.log(maxSubarraySumtwo([100, 200, 300, 400], 2));
+// console.log(maxSubarraySumtwo([1, 4, 2, 10, 23, 3, 1, 0, 20], 4));
+// console.log(maxSubarraySumtwo([-3, 4, 0, -2, 6, -1], 2));
+// console.log(maxSubarraySumtwo([3, -2, 7, -4, 1, -1, 4, -2, 1], 2));
+// console.log(maxSubarraySumtwo([2, 3], 3));
 // 100,200,300,400 2
 // 1,4,2,10,23,3,1,0,20 4
 // -3,4,0,-2,6,-1 2
 // 3,-2,7,-4,1,-1,4,-2,1 2
 // 2,3 3
+
+function minSubArrayLen(inArray: number[], n: number) : number{
+    let start: number = 0
+    let end: number = 2
+    let subSum: number = inArray[0]
+    for (const item of inArray) {
+        if(item >= n) return 1
+    }
+    while(end < inArray.length){
+        subSum = subSum - inArray[start++] + inArray[end++]
+        if(subSum >= n ){
+            return end-start
+        }
+    }
+    return end-start
+}
+
+
+console.log(minSubArrayLen([2,3,1,2,4,3],9))

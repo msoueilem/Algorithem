@@ -293,3 +293,26 @@ function hammingWeight(n: number): number {
 };
 
 console.log(hammingWeight(0o1011))
+
+// /**
+//  * Definition for a binary tree node.
+ class TreeNode {
+     val: number
+     left: TreeNode | null
+     right: TreeNode | null
+     constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
+         this.val = (val===undefined ? 0 : val)
+         this.left = (left===undefined ? null : left)
+         this.right = (right===undefined ? null : right)
+     }
+ }
+//  */
+
+ function inorderTraversal(root: TreeNode | null): number[] {
+    let inorderArray: number[] = []
+    if(root == null) inorderArray.push()
+    if(root.left == null && root.right == null) inorderArray.push(root.val)
+    inorderTraversal(root.left)
+    inorderTraversal(root.right)
+    return inorderArray
+};
