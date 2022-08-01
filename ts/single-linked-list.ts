@@ -1,17 +1,20 @@
-class node {
-    next: node | null;
+class MyNode {
+    next: MyNode | null;
     data: any;
-    constructor(indata: any) {
-        this.data = indata;
+    constructor(inData?: any) {
+        this.data = inData;
         this.next = null;
     }
-    getData() {
+    get() {
         return this.data;
     }
+    set(inData: any) {
+        this.data = inData;
+    }
 }
-class singleLinkedList {
-    head: node | null;
-    tail: node | null;
+class SingleLinkedList {
+    head: MyNode | null;
+    tail: MyNode | null;
     length: number;
     constructor() {
         this.head = null;
@@ -23,8 +26,8 @@ class singleLinkedList {
         return this.length;
     }
 
-    push(val: string) {
-        let newNode: node = new node(val)
+    push(val: any) {
+        let newNode: MyNode = new MyNode(val)
         if (this.head === null) {
             newNode.next = this.tail;
             this.head = newNode;
@@ -38,8 +41,8 @@ class singleLinkedList {
         }
         this.length++;
     }
-    pushHead(val: string) {
-        let newNode: node = new node(val)
+    pushHead(val: any) {
+        let newNode: MyNode = new MyNode(val)
 
         if (!this.head) {
             this.head = newNode;
@@ -51,8 +54,8 @@ class singleLinkedList {
         this.length++;
     }
     
-    pushTail(val: string) {
-        let newNode: node = new node(val)
+    pushTail(val: any) {
+        let newNode: MyNode = new MyNode(val)
         if (this.head === null) {
             this.head = newNode;
             this.tail = newNode;
@@ -62,13 +65,13 @@ class singleLinkedList {
         }
         this.length++;
     }
-    pushIndex(val: string, index: number) {
+    pushIndex(val: any, index: number) {
         if (index <= 0) {
             this.pushHead(val)
         } else if (index >= this.length) {
             this.pushTail(val)
         } else {
-            let newNode: node = new node(val)
+            let newNode: MyNode = new MyNode(val)
             let temp = this.head;
             let i = 0;
             while (i < index) {
@@ -85,7 +88,7 @@ class singleLinkedList {
         if (!this.head) {
             data = "empty"
         } else {
-            data = this.head.getData()
+            data = this.head.get()
             this.head = this.head.next
             this.length--;
         }
@@ -108,13 +111,13 @@ class singleLinkedList {
         }
         return data
     }
-    popIndex(val: string, index: number) {
+    popIndex(val: any, index: number) {
         if (index <= 0) {
             this.pushHead(val)
         } else if (index >= this.length) {
             this.pushTail(val)
         } else {
-            let newNode: node = new node(val)
+            let newNode: MyNode = new MyNode(val)
             let temp = this.head;
             let i = 0;
             while (i < index) {
@@ -127,16 +130,63 @@ class singleLinkedList {
         }
     }
 
+    get(val: any) {
+        let temp = this.head;
+        let index = 0;
+        while(temp?.next){
+            if(temp.get() === val){
+                return `Found it @ index(${index}) with value ${typeof temp.get() === "string" ? temp.get().toUpperCase() : temp.get()}`;
+            }
+            temp = temp.next;
+            index++;
+        }
+        return `Couldn't found "${val}" in the list`;
+    }
+
+    set(val: any , index: number) {
+        let temp = this.head;
+        let i = 0;
+        while(temp?.next){
+            if(i === index){
+                console.log(`Changing "${temp.get()}" to new value "${val}" at index ${index}`);
+                
+                temp.set(val);
+                return;
+            }
+            temp = temp.next;
+            i++;
+        }
+        return `Couldn't found this index(${index}) in the list`;
+    }
+
+    reverse() {
+        if(this.head === null){
+            console.log("List empty");
+        } else {
+            
+        let temp = this.head;
+        while(temp.next){
+            let current = temp.next;
+            temp.next = current.next;
+            current.next = this.head;
+            this.head = current;
+        }
+        this.tail = temp;
+        this.tail.next = null;
+    
+    }
+    }
+
     toString(): string {
         let resultString: string = ""
         let index: number = 0;
         if (this.head === null) {
             resultString = "empty";
         } else {
-            resultString = `${this.head.getData()} (${index++})`
+            resultString = `${this.head.get()} (${index++})`
             let tempHead = this.head;
             while (tempHead!.next !== null) {
-                resultString = `${resultString} -> ${tempHead?.next.getData()} (${index++})`
+                resultString = `${resultString} -> ${tempHead?.next.get()} (${index++})`
                 tempHead = tempHead!.next;
             }
         }
@@ -146,7 +196,8 @@ class singleLinkedList {
 
 
 
-let mylist: singleLinkedList = new singleLinkedList();
+let mylist: SingleLinkedList = new SingleLinkedList();
+// mylist.reverse()
 mylist.pushTail("Hello")
 mylist.pushTail("World")
 mylist.pushTail("!")
@@ -158,8 +209,29 @@ mylist.popTail()
 mylist.pushIndex("program",100)
 mylist.pushTail("to")
 mylist.pushHead("test")
+mylist.pushHead(123435)
 mylist.pushTail("typescript")
 mylist.pushIndex("language", 0)
-console.log(mylist.toString())
-console.log("My list Length: ",mylist.lengt())
+// console.log(mylist.toString())
+// console.log("reversing....");
+// mylist.reverse()
+// console.log(mylist.toString())
 
+let numberList: SingleLinkedList = new SingleLinkedList()
+numberList.pushHead(1)
+numberList.pushHead(2)
+numberList.pushHead(3)
+numberList.pushHead(4)
+numberList.pushHead(5)
+console.log(numberList.toString())
+console.log("reversing....");
+numberList.reverse()
+console.log(numberList.toString())
+
+
+// console.log("My list Length: ",mylist.lengt())
+
+// console.log(mylist.get(123435));
+// mylist.set(45,5)
+// console.log(mylist.get("language"));
+// console.log(mylist.get(45));
