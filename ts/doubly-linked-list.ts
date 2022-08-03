@@ -125,16 +125,74 @@ class DoublyLinkedList {
             this.length--;
         }
     }
-    popIndex(val: any, index: number) {
+    popIndex(index: number) {
+        if (index <= 0) {
+            this.popHead()
+        } else if (index >= this.length-1) {
+            this.popTail()
+        } else {
+            console.log(`Poping from index(${index})`);
+            this.toString();
+            
+            let temp = this.head;
+            let i = 0;
+             do{
+                temp = temp?.next!;
+                i++;
+            }while (i < index - 1)
+            let losingNode = temp!.next;
+            let tempNext = losingNode!.next;
+            if(!losingNode?.next) {
+                this.popTail()
+            } else if(!losingNode?.previous) { 
+                this.popHead()
+            } else { 
+                tempNext!.previous = temp;
+                temp!.next = tempNext;
+                losingNode!.next = null;
+                losingNode!.previous = null;
+            }   
+        }
     }
 
     get(val: any) {
+        let temp = this.head;
+        let index = 0;
+        while(temp!.next){
+            if(temp!.get() === val) {
+                console.log(`Found it at index:`);
+                
+                return index;
+            }
+            temp = temp!.next;
+            index++;
+        }
+        console.log(`didn't found it`);
+        
+        return 0;
     }
 
     set(val: any , index: number) {
+        this.pushIndex(val,index);
     }
 
     reverse() {
+        let temp = this.head;
+        let i = 0;
+        while(i < this.getLength()){
+            let current = temp;
+            temp = temp!.next;
+            console.log(temp?.get() , this.tail?.get() , current?.get() );
+            
+            current!.next = current!.previous;
+            current!.previous = temp;
+            i++
+        }
+        // temp!.next = this.tail!.previous;
+        // temp!.previous = null;
+        
+        this.tail = this.head;
+        this.head = temp;
     }
 
     toString(): string {
@@ -146,7 +204,7 @@ class DoublyLinkedList {
             resultString = `${this.head.get()} (${index++})`
             let tempHead = this.head;
             while (tempHead!.next) {
-                resultString = `${resultString} -> ${tempHead?.next.get()} (${index++})`
+                resultString = `${resultString} <-> ${tempHead?.next.get()} (${index++})`
                 tempHead = tempHead!.next;
             }
         }
@@ -179,11 +237,16 @@ let numList: DoublyLinkedList = new DoublyLinkedList()
 numList.pushIndex(1,0)
 numList.pushIndex(2,1)
 numList.pushIndex(3,2)
-numList.popHead()
+// numList.popHead()
 numList.pushIndex(4,3)
-numList.popTail()
-numList.pushIndex(5,0)
+// numList.popTail()
+numList.pushIndex(5,4)
+// numList.popIndex(2);
 console.log(numList.toString())
+numList.reverse()
+console.log(numList.toString())
+// console.log(numList.get(2))
+// console.log(numList.get(5))
 // console.log("reversing....");
 // numList.reverse()
 // console.log(numList.toString())
