@@ -1,7 +1,7 @@
 class MyNode {
     next: MyNode | null;
     data: any;
-    constructor(inData?: any) {
+    constructor(inData: any) {
         this.data = inData;
         this.next = null;
     }

@@ -292,7 +292,7 @@ function hammingWeight(n: number): number {
     return counter
 };
 
-console.log(hammingWeight(0o1011))
+// console.log(hammingWeight(0o1011))
 
 // /**
 //  * Definition for a binary tree node.
@@ -308,11 +308,53 @@ console.log(hammingWeight(0o1011))
  }
 //  */
 
- function inorderTraversal(root: TreeNode | null): number[] {
-    let inorderArray: number[] = []
-    if(root == null) inorderArray.push()
-    if(root.left == null && root.right == null) inorderArray.push(root.val)
-    inorderTraversal(root.left)
-    inorderTraversal(root.right)
-    return inorderArray
-};
+//  function inorderTraversal(root: TreeNode | null): number[] {
+//     let inorderArray: number[] = []
+//     if(root == null) inorderArray.push()
+//     if(root.left == null && root.right == null) inorderArray.push(root.val)
+//     inorderTraversal(root.left)
+//     inorderTraversal(root.right)
+//     return inorderArray
+// };
+
+// Interview in Brooklyan
+// function removeDigit(num: string, k: number) : string{
+//     if(k === 0) return num;
+//     else if(num.length < k) return "0";
+//     else {
+//         let start = 0;
+//         let end = 0;
+//         let window = 0;
+//         let scopeI = 0;
+//         let scopeJ = 0;
+//         let output = "";
+//         while(end < k){
+//             window += parseInt(num[end]);
+//             end++;
+//         }
+//         scopeI = start;
+//         scopeJ = end;
+//         while(end < num.length){
+//             let nextWindow = (window - parseInt(num[start]) + parseInt(num[end]));
+//             console.log(window, nextWindow,  parseInt(num[start]) , parseInt(num[end]));
+            
+//             // window = Math.max(window , (window - parseInt(num[start] + parseInt(num[end]))))
+//             if(window < nextWindow) {
+//                 window = nextWindow ;
+//                 scopeI = start;
+//                 scopeJ = end;
+//             }
+//             start++;
+//             end++;
+//         }
+//         console.log(scopeI,scopeJ);
+    
+//         for (let i = 0; i < num.length; i++) {
+//             if(i>= scopeI && i<=scopeJ) continue;
+//             output = output + num[i];
+//         }
+//         return output;
+//     }
+// }
+
+// console.log(removeDigit("1243219",3));
