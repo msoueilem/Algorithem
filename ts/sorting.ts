@@ -194,7 +194,7 @@ function digiCount(number: number): number{
     return Math.floor(Math.log10(Math.abs(number))) + 1;
 }
 
-console.log(digiCount(65812593629383));
+// console.log(digiCount(65812593629383));
 
 // mostDigitCounts
 function mostDigitCounts(arr: number[]): number{
@@ -213,17 +213,16 @@ function mostDigitCounts(arr: number[]): number{
 function radixSort(arr: number[]): number[]{
     let maxDigitCount: number = mostDigitCounts(arr);
     for (let i = 0; i < maxDigitCount; i++) {
-        let bucketDigit = Array.from({length:10} , () => [])
+        let bucketDigit: number[][] = Array.from({length:10} , () => [])
         for (let j = 0; j < arr.length; j++) {
             let index = getdigi(arr[j],i);
             bucketDigit[index].push(arr[j])
         }   
-        arr = [].concat(...bucketDigit);
+        arr = bucketDigit.flat();
     }
     return arr;
 }
 
 console.log(radixSort([54,0,6,19,53,2,64,10,7,12,5]));
-// console.log(radixSort([54,7,12,5,6]));
-// console.log(radixSort([8,1,2,3,6,9]));
-
+console.log(radixSort([54,7,12,5,6]));
+console.log(radixSort([8,1,2,3,6,9]));
