@@ -174,7 +174,7 @@ class SingleLinkedList {
         this.tail = temp;
         this.tail.next = null;
     
-    }
+        }
     }
 
     toString(): string {
