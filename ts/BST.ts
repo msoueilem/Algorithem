@@ -79,7 +79,49 @@ class BST {
         }
         return data;
     }
-    // getTotalElement(): string{
+    DFS(): number[] {
+        let arr: number[] = [];
+        console.log("PreOrder Travers")
+        this.travers(arr);
+        return arr;
+    }
+    travers(data: number[],node: BSTNode | null = this.root){
+        if(node !== null){
+            if(node.right) this.travers(data,node.right);
+            data.push(node.data);
+            if(node.left) this.travers(data,node.left);
+        }
+    }
+   
+}
+
+
+let root = new BSTNode(50);
+root.left = new BSTNode(20);
+root.right = new BSTNode(60);
+let bsti =  new BST(root);
+bsti.insert(40);
+bsti.insert(10);
+bsti.insert(30);
+bsti.insert(70);
+bsti.insert(80);
+bsti.insert(90);
+bsti.search(50)
+// bsti.toString(bsti.root);
+console.log(bsti.BFS());
+console.log("DFS");
+console.log(bsti.DFS());
+let bst = new BST();
+bst.insert(10);
+bst.insert(6);
+bst.insert(15);
+bst.insert(3);
+bst.insert(8);
+bst.insert(20);
+console.log(bst.BFS())
+
+
+ // getTotalElement(): string{
     //     return `Total element in the tree: ${this.totalElement}`;
     // }
 
@@ -163,7 +205,7 @@ class BST {
     //     //         temp = temp.right!;
     //     // }
     // }
-}
+
 
 // let bst = new BST();
 // bst.add(11, bst.root);
@@ -175,25 +217,3 @@ class BST {
 // // bst.getTotalElement();
 // // console.log(bst.toString());
 // bst.toString();
-
-let root = new BSTNode(50);
-root.left = new BSTNode(20);
-root.right = new BSTNode(60);
-let bsti =  new BST(root);
-bsti.insert(40);
-bsti.insert(10);
-bsti.insert(30);
-bsti.insert(70);
-bsti.insert(80);
-bsti.insert(90);
-bsti.search(50)
-// bsti.toString(bsti.root);
-console.log(bsti.BFS());
-let bst = new BST();
-bst.insert(10);
-bst.insert(6);
-bst.insert(15);
-bst.insert(3);
-bst.insert(8);
-bst.insert(20);
-console.log(bst.BFS())
