@@ -1,0 +1,30 @@
+/* body{
+  width: 50%;
+  background-color: red;
+} */
+.main {
+  display: flex;
+}
+.box {
+  padding: 2px;
+  border-radius: 25% 10%;
+  width: 4rem;
+  height: 4rem;
+  display: none;
+  background-color: red;
+}
+.blocks {
+  flex: flex 1;
+  margin: 2px;
+}
+
+@media (max-width: 500px) {
+  .main {
+    flex-direction: column;
+  }
+}
+@media (orientation: landscope) {
+  .main {
+    flex-direction: row;
+  }
+}
